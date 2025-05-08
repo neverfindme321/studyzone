@@ -7,11 +7,13 @@ function goStealth() {
 }
 
 function openGame(url) {
-  window.open(url, "_blank");
+  // Proxy the URL by opening it inside the Vercel-hosted proxy page
+  const proxyUrl = "https://studyzone-bcw9xe9bk-neverfindme321s-projects.vercel.app/proxy.html?url=" + encodeURIComponent(url);
+  window.open(proxyUrl, "_blank");
 }
 
 function goProxy() {
   const url = document.getElementById("proxyUrl").value;
-  if (!url.startsWith("http")) return alert("Use full URL like https://example.com");
-  window.open(url, "_blank"); // Opens the proxy URL directly
+  if (!url.startsWith("http")) return alert("Please use a full URL, like https://example.com.");
+  openGame(url); // Proxy the URL through the openGame function
 }
