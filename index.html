@@ -3,14 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Zone - Proxy</title>
+  <title>Proxy Zone</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Study Zone</h1>
+  <h1>Welcome to Proxy Zone</h1>
   <p>Enter a URL to visit via proxy:</p>
   <input type="text" id="proxyUrl" placeholder="Enter URL here..." />
   <button onclick="goProxy()">Go to Proxy</button>
 
-  <script src="stealth.js"></script>
+  <script>
+    // Function to handle proxying the URL
+    function goProxy() {
+      const url = document.getElementById("proxyUrl").value;
+      if (!url.startsWith("http")) return alert("Please use a full URL, like https://example.com.");
+      
+      // Open the entered URL in a new window with proxy
+      window.open("https://studyzone-bcw9xe9bk-neverfindme321s-projects.vercel.app/?url=" + encodeURIComponent(url), "_blank");
+    }
+    
+    // Function to prevent right-click on the page to avoid tampering
+    window.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
+  </script>
 </body>
 </html>
