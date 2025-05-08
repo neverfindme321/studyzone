@@ -13,5 +13,5 @@ function goStealth() {
   function goProxy() {
     const url = document.getElementById("proxyUrl").value;
     if (!url.startsWith("http")) return alert("Use full URL like https://example.com");
-    window.open("https://your-proxy-url.com/proxy?url=" + encodeURIComponent(url), "_blank");
+    window.open("https://studyzone-bcw9xe9bk-neverfindme321s-projects.vercel.app/" + encodeURIComponent(url), "_blank");
   }  
