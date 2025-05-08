@@ -1,54 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proxy Zone</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Browser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
 
-    input {
-      padding: 10px;
-      margin: 10px;
-      width: 80%;
-      font-size: 16px;
-    }
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            font-size: 16px;
+        }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
 
-    h1 {
-      margin-bottom: 20px;
-    }
-  </style>
+        button:hover {
+            background-color: #45a049;
+        }
+
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            margin-top: 20px;
+        }
+
+        #loading {
+            font-size: 18px;
+            color: #4CAF50;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to Proxy Zone</h1>
-  <p>Enter a URL to visit via proxy:</p>
-  <input type="text" id="proxyUrl" placeholder="Enter URL here..." />
-  <button onclick="goProxy()">Go to Proxy</button>
-
-  <script>
-    // Function to handle proxying the URL
-    function goProxy() {
-      const url = document.getElementById("proxyUrl").value;
-      if (!url.startsWith("http")) return alert("Please use a full URL, like https://example.com.");
-      
-      // Open the entered URL in a new window with proxy
-      window.open("https://studyzone-bcw9xe9bk-neverfindme321s-projects.vercel.app/?url=" + encodeURIComponent(url), "_blank");
-    }
+    <h1>Advanced Proxy Browser</h1>
+    <p>Enter a URL (e.g., https://www.roblox.com) to visit it within the proxy:</p>
+    <input type="text" id="urlInput" placeholder="Enter a URL..." />
+    <button onclick="loadSite()">Go to Site</button>
     
-    // Function to prevent right-click on the page to avoid tampering
-    window.addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-    });
-  </script>
+    <p id="loading">Loading...</p>
+
+    <iframe id="proxyFrame" src="" title="Proxy Browser"></iframe>
+
+    <script>
+        // Function to load the proxy page
+        function loadSite() {
+            const url = document.getElementById("urlInput").value;
+            const loadingText = document.getElementById("loading");
+            const iframe = document.getElementById("proxyFrame");
+
+            // Show loading text
+            loadingText.style.display = "block";
+
+            // Validate the URL
+            if (!url.startsWith("http") && !url.startsWith("https")) {
+                alert("Please enter a valid URL starting with 'https://'");
+                return;
+            }
+
+            // Construct the proxy URL (in this case, we are directly embedding the URL)
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+            
+            // Set the iframe source to the proxy URL
+            iframe.src = proxyUrl;
+
+            // Hide loading text when iframe is done loading
+            iframe.onload = function() {
+                loadingText.style.display = "none";
+            };
+        }
+    </script>
 </body>
 </html>
